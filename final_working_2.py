@@ -39,30 +39,22 @@ class Ui_Form(object):
 
         self.history.setGeometry(QtCore.QRect(240, 220, 81, 50))
         self.history.setObjectName("history")
-
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 40, 921, 181))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-
         self.verticalLayout.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetNoConstraint)
         self.verticalLayout.setObjectName("verticalLayout")
-
         self.edit_input_text.setObjectName("edit_input_text")
         self.verticalLayout.addWidget(self.edit_input_text)
-
         self.btn_translate.setObjectName("btn_translate")
         self.verticalLayout.addWidget(self.btn_translate)
         self.btn_translate.clicked.connect(self.click_translate)
-
         self.label_translation.setText("")
         self.label_translation.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_translation.setObjectName("label_translation")
         self.verticalLayout.addWidget(self.label_translation)
-
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 270, 921, 621))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-
         self.horizontalLayout.setObjectName("horizontalLayout")
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -70,8 +62,6 @@ class Ui_Form(object):
         self.list_pl.setSizePolicy(sizePolicy)
         self.list_pl.setObjectName("list_pl")
         self.horizontalLayout.addWidget(self.list_pl)
-
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -79,23 +69,16 @@ class Ui_Form(object):
         self.list_en.setSizePolicy(sizePolicy)
         self.list_en.setObjectName("list_en")
         self.horizontalLayout.addWidget(self.list_en)
-
         self.list_en.clicked.connect(self.list_en_clicked)
-
         self.verticalLayout_2.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetMaximumSize)
         self.verticalLayout_2.setContentsMargins(0, -1, -1, -1)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-
-
         self.label_send.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_send.setObjectName("label_send")
         self.verticalLayout_3.addWidget(self.label_send)
         self.label_send.setHidden(True)
-
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -107,16 +90,13 @@ class Ui_Form(object):
         self.horizontalLayout_2.addWidget(self.btn_yes)
         self.btn_yes.clicked.connect(self.click_yes)
         self.btn_yes.setHidden(True)
-
         self.btn_no.setMinimumSize(QtCore.QSize(0, 200))
         self.btn_no.setObjectName("btn_no")
         self.horizontalLayout_2.addWidget(self.btn_no)
         self.btn_no.clicked.connect(self.click_no)
         self.btn_no.setHidden(True)
-
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
         self.verticalLayout_2.addLayout(self.verticalLayout_3)
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -125,19 +105,15 @@ class Ui_Form(object):
         self.edit_output_text.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.edit_output_text.setObjectName("edit_output_text")
         self.verticalLayout_2.addWidget(self.edit_output_text)
-
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btn_output.sizePolicy().hasHeightForWidth())
         self.btn_output.setSizePolicy(sizePolicy)
-
         self.btn_output.setObjectName("btn_output")
         self.btn_output.clicked.connect(self.click_output)
-
         self.verticalLayout_2.addWidget(self.btn_output)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -160,10 +136,12 @@ class Ui_Form(object):
         global word
         global slowo
         word = self.edit_input_text.text()
-        slowo = ts.bing(word, from_language='en', to_language='pl')
+        slowo = translator.translate_text(word, target_lang="PL").text
+        # slowo = ts.bing(word, from_language='en', to_language='pl')
         self.label_translation.setText(slowo)
-        self.list_en.addItem(word)
-        self.list_pl.addItem(slowo)
+
+
+
         self.btn_yes.setHidden(False)
         self.btn_no.setHidden(False)
         self.label_send.setHidden(False)
@@ -180,6 +158,23 @@ class Ui_Form(object):
             my_deck.add_note(en_pl)
             my_deck.add_note(pl_en)
             used.append(word)
+
+            list_item_en = QtWidgets.QListWidgetItem(word)
+            list_item_en.setBackground(QtGui.QBrush(QtGui.QColor("green")))
+            self.list_en.addItem(list_item_en)
+
+            list_item_pl = QtWidgets.QListWidgetItem(slowo)
+            list_item_pl.setBackground(QtGui.QBrush(QtGui.QColor("green")))
+            self.list_pl.addItem(list_item_pl)
+        else:
+            list_item_en = QtWidgets.QListWidgetItem(word)
+            list_item_en.setBackground(QtGui.QBrush(QtGui.QColor("yellow")))
+            self.list_en.addItem(list_item_en)
+
+            list_item_pl = QtWidgets.QListWidgetItem(slowo)
+            list_item_pl.setBackground(QtGui.QBrush(QtGui.QColor("yellow")))
+            self.list_pl.addItem(list_item_pl)
+
         self.btn_yes.setHidden(True)
         self.btn_no.setHidden(True)
         self.label_send.setHidden(True)
@@ -187,6 +182,14 @@ class Ui_Form(object):
         self.edit_input_text.setText("")
 
     def click_no(self):
+        list_item_en = QtWidgets.QListWidgetItem(word)
+        list_item_en.setBackground(QtGui.QBrush(QtGui.QColor("red")))
+        self.list_en.addItem(list_item_en)
+
+        list_item_pl = QtWidgets.QListWidgetItem(slowo)
+        list_item_pl.setBackground(QtGui.QBrush(QtGui.QColor("red")))
+        self.list_pl.addItem(list_item_pl)
+
         self.btn_yes.setHidden(True)
         self.btn_no.setHidden(True)
         self.label_send.setHidden(True)
@@ -212,6 +215,9 @@ if __name__ == "__main__":
     import csv
     import genanki
     import translators as ts
+    import deepl
+    auth_key = "769f6d51-6827-a8a6-7037-2c20b7137d03:fx"
+    translator = deepl.Translator(auth_key)
 
     global used
     with open('/home/szymek/used.csv', 'r') as csvfile:
