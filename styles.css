@@ -1,0 +1,59 @@
+QWidget{
+    font-family: "Noto Sans Display Medium";
+    background-color: "black";
+}
+QPushButton{
+    background-color: "green";
+}
+QLabel{
+    color: "white";
+}
+QListWidget{
+    background-color: "grey";
+
+    font-size: 18px;
+}
+QLineEdit{
+    background-color: "grey";
+}
+#btn_no{
+    background-color: "red";
+}
+#history{
+    font-size: 18px;
+
+}
+#edit_input_text{
+    font-size: 15px;
+}
+#verticalLayoutWidget{
+    margin: 0;
+
+}
+#btn_translate{
+    font-size: 31px;
+}
+#label_translation{
+    font-size: 18px;
+}
+#horizontalLayout{
+    margin: 0;
+}
+#label_send{
+    font-size: 31px;
+}
+#label_send{
+    font-size: 31px;
+}
+#btn_yes{
+    font-size: 31px;
+}
+#btn_no{
+    font-size: 31px;
+}
+#edit_output_text{
+    font-size: 15px;
+}
+#btn_output{
+    font-size: 31px;
+}
